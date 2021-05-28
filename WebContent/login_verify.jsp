@@ -40,9 +40,9 @@ if(isLogin) {
 <%
 	} else {%>
     <script>
-	 document.location.href='./login.jsp'
-	 </script>
-
+	alert("해당하는 학생 계정이 없습니다."); 
+	document.location.href='./login.jsp'
+	</script>
 
 <%
 	}
