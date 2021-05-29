@@ -51,6 +51,11 @@ else{
 		if (ex.getErrorCode() == 20002) sMessage="암호는 4자리 이상이어야 합니다";
 		else if (ex.getErrorCode() == 20003) sMessage="암호에 공란은 입력되지 않습니다.";
 		else sMessage="잠시 후 다시 시도하십시오";
+		out.println("<script>");
+		out.println("alert('"+sMessage+"');");
+		out.println("location.href='update.jsp';");
+		out.println("</script>");
+		out.flush();
 
 	}
 	finally{

@@ -1,6 +1,6 @@
 CREATE OR REPLACE TRIGGER BeforeUpdateStudent 
 BEFORE
-UPDATE ON student
+UPDATE ON students
 FOR EACH ROW
 
 DECLARE
