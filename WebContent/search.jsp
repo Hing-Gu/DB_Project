@@ -88,7 +88,7 @@ try {
 		System.out.println("result2 = "+course_start_time);
 		
 		cstmt.close();		
-		
+		//
 	 	tmp = course_start_time.substring(0,2);	
 	 	course_end_hh = Integer.parseInt(tmp) + 1;
 	 	tmp = course_start_time.substring(3);	
