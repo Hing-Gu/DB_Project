@@ -83,6 +83,8 @@
 			</tr>
 			
 			
+	
+	
 			  <td colspan="4" align="center">
 			  <input id="update_btn" type="submit" value="수정 완료">
 			  <input id="update_btn" type="reset" value="초기화">
