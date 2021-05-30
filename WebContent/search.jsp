@@ -19,6 +19,10 @@ String course_name = "";
 String course_time = "";
 String course_day = "";
 int course_unit = 0;
+String course_start_time = "";
+String tmp = "";
+int course_end_hh = 0;
+int course_end_mi = 0;
 int total_course = 0;
 int total_unit = 0;
 String course_addr = "";
@@ -29,6 +33,7 @@ ResultSet rs = null;
 ResultSet sub_rs = null;
 String sql;
 String sub_sql;
+String day_sql;
 String time_sql;
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
 String user = "db1812572";
@@ -64,10 +69,8 @@ try {
 			total_unit = total_unit + course_unit;
 			total_course++;
 		}
-		System.out.println("dd = "+course_time);
-		time_sql = "{? = call getDay(?)}";
-		cstmt = conn.prepareCall(time_sql);
-		System.out.println("cstmt = "+cstmt);
+		day_sql = "{? = call getDay(?)}";
+		cstmt = conn.prepareCall(day_sql);
 		cstmt.registerOutParameter(1, java.sql.Types.VARCHAR);
 		cstmt.setString(2,course_time);
 		cstmt.execute();
@@ -75,13 +78,30 @@ try {
 		System.out.println("result = "+course_day);
 		
 		cstmt.close();
+		
+		time_sql = "{? = call getTime(?)}";
+		cstmt = conn.prepareCall(time_sql);
+		cstmt.registerOutParameter(1, java.sql.Types.VARCHAR);
+		cstmt.setString(2,course_time);
+		cstmt.execute();
+		course_start_time = cstmt.getString(1);
+		System.out.println("result2 = "+course_start_time);
+		
+		cstmt.close();		
+		
+	 	tmp = course_start_time.substring(0,2);	
+	 	course_end_hh = Integer.parseInt(tmp) + 1;
+	 	tmp = course_start_time.substring(3);	
+	 	course_end_mi = Integer.parseInt(tmp) + 15;
+
+
 %>
 
 <tr>
 	<td align="center"><%=course_id %></td>
 	<td align="center"><%=course_id_no %></td>
 	<td align="center"><%=course_name %></td>
-	<td align="center"><%=course_day %></td>
+	<td align="center"><%=course_day %> <%=course_start_time %> - <%= course_end_hh %>:<%= course_end_mi %></td>
 	<td align="center"><%=course_addr %></td>
 	<td align="center"><%=course_unit %></td>
 	
@@ -90,7 +110,8 @@ try {
 	rs.close();
 	pstmt.close();
 	conn.close();
-
+}catch (NumberFormatException e){
+	
 }catch (SQLException ex){
 	System.err.println("SQLException: " + ex.getMessage());
 }
