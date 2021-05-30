@@ -5,6 +5,7 @@
 <body>
 
 <%
+request.setCharacterEncoding("UTF-8");
 Connection myConn = null;
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
