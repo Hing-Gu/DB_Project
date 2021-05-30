@@ -1,51 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="java.sql.*"%>
-<%
-String userID=request.getParameter("userID");
-String userPassword=request.getParameter("userPassword");
+<%@ page import="java.sql.*" %>
+<html>
+<head><title> 수강신청 사용자 정보 수정 </title></head>
+<body>
 
+<%
+request.setCharacterEncoding("UTF-8");
 Connection myConn = null;
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
 
-String user = "db1812572";
-String passwd = "soo";
+String user = "db1715914";
+String passwd = "oracle";
 Class.forName(dbdriver);
-myConn=DriverManager.getConnection(dburl, user, passwd);
 
-String mySQL="select s_id from students where s_id='" + userID + "'and s_pwd='" + userPassword + "'";
+PreparedStatement stmt = null;
 
-Statement stmt = myConn.createStatement();
+String newId = request.getParameter("id");
+String newPwd = request.getParameter("password");
+String newConfirmPwd = request.getParameter("passwordConfirm");
+String newMajor = request.getParameter("major");
 
-ResultSet rs = stmt.executeQuery(mySQL);
-Boolean isLogin = false;
+//만약 패스워드와 패스워드 확인이 다르다면
+if(!newPwd.equals(newConfirmPwd)){
+	%><script> 
+	alert("비밀번호와 비밀번호 확인이 다릅니다."); 
+	location.href="update.jsp";  
+	</script><%
+}
+else{
+	try{
+		myConn = DriverManager.getConnection(dburl, user, passwd);
+		String SQL_query = "UPDATE students SET s_pwd=?, s_major=? WHERE s_id=?";
+		stmt= myConn.prepareStatement(SQL_query);
+		
+		stmt.setString(1, newPwd);
+		stmt.setString(2, newMajor);
+		stmt.setString(3, newId);
+		
+		stmt.executeUpdate();
+		%>
+		
+		<script>
+			alert("수정이 완료되었습니다.");
+			location.href="main.jsp";
+			</script>
+		<%
+	}
+	catch(SQLException ex){
+		String sMessage="";
+		if (ex.getErrorCode() == 20002) sMessage="암호는 4자리 이상이어야 합니다";
+		else if (ex.getErrorCode() == 20003) sMessage="암호에 공란은 입력되지 않습니다.";
+		else sMessage="잠시 후 다시 시도하십시오";
+		out.println("<script>");
+		out.println("alert('"+sMessage+"');");
+		out.println("location.href='update.jsp';");
+		out.println("</script>");
+		out.flush();
 
-if(rs!=null){
-	if(rs.next()){
-		isLogin = true;
-		String id = rs.getString("s_id");
-		session.setAttribute("user", id);
+	}
+	finally{
+		if(stmt!=null)try{stmt.close();}catch(SQLException sqle){}
 	}
 }
 
-// DB에 내가 적은 정보가 있다면
-if(isLogin) {
-    // 첫 페이지로 돌려보낸다
-	%>
-    <script>
-	 document.location.href='./main.jsp'
-	 </script>
 
-
-<%
-	} else {%>
-    <script>
-	 document.location.href='./login.jsp'
-	 </script>
-
-
-<%
-	}
-stmt.close();
-myConn.close();
 %>
+
+</body></html>

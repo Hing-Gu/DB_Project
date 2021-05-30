@@ -13,8 +13,8 @@
 	Class.forName(dbdriver);
 	ResultSet rs = null;
 	Statement stmt = null;
-	String userMajor ="";
-	String userPwd = "";
+	String user_major ="";
+	String user_pwd = "";
 	
 %>
 <%
@@ -32,19 +32,24 @@
 			//s_major, s_name, s_pwd 변경위해 받아옴
 			myConn=DriverManager.getConnection(dburl, user, passwd);
 			stmt = myConn.createStatement();
-			String mySQL = "select s_major,s_name,s_pwd from student where s_id='" + session_id + "'" ;
+			String mySQL = "select s_major,s_pwd, s_enroll_unit from students where s_id='" + session_id + "'";
+			rs=stmt.executeQuery(mySQL);
 		}catch(SQLException e){
 			out.println(e);
 			e.printStackTrace();
 		}finally{
 			if(rs != null){
 				if (rs.next()) {
-					userMajor = rs.getString("s_major");
-					userPwd = rs.getString("s_pwd");
-				}
-				else if(prs.next()){
-					userAddr = prs.getString("p_name");
-					userPwd = prs.getString("p_pwd");
+					//바뀌기 전 사용자 정보들 쿼리로 받아온 것
+					user_major = rs.getString("s_major");
+					user_pwd = rs.getString("s_pwd");
+					%>
+					<script> 
+						alert("user_major : "+user_major); 
+						alert("user_pwd : "+user_pwd);  
+						
+					</script>  
+<%
 				}
 				else {
 %>
@@ -56,22 +61,30 @@
 				}
 		}
 	}
+	}
 %>
 
-<form method="post" action="update_verify.jsp">
+<form method="post" action="update_verify.jsp?id=<%=session_id%>">
 <table align="center" id="update_table">
 			<tr>
 			  <td id="update_td">아이디</td>
 			  <td colspan="3"><input id="update_id_in" type="text" name="id" size="50" style="text-align: center;" value="<%=session_id%>" disabled></td>
 			</tr>
-			<tr>  
+			<tr>
+			  <td id="update_td">전공</td>
+			  <td><input id="update_mj_in" type="major" name="major" size="10" value=<%=user_major%>></td>
+			</tr>
+			
+			<tr>
 			  <td id="update_td">비밀번호</td>
-			  <td><input id="update_pw_in" type="password" name="password" size="10" value=<%=userPwd%>></td>
-			  <td id="update_td">확인</td>
+			  <td><input id="update_pw_in" type="password" name="password" size="10" value=<%=user_pwd%>></td>
+			  <td id="update_td">비밀번호 확인</td>
 			  <td><input id="update_pw_in" type="password" name="passwordConfirm" size="10" ></td>
 			</tr>
 			
 			
+	
+	
 			  <td colspan="4" align="center">
 			  <input id="update_btn" type="submit" value="수정 완료">
 			  <input id="update_btn" type="reset" value="초기화">
