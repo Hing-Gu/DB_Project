@@ -62,8 +62,6 @@
 		}
 	}
 	}
-
-
 %>
 
 <form method="post" action="update_verify.jsp?id=<%=session_id%>">
