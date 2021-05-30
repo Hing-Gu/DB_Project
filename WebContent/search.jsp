@@ -89,6 +89,7 @@ try {
 		
 		cstmt.close();		
 		//
+		//
 	 	tmp = course_start_time.substring(0,2);	
 	 	course_end_hh = Integer.parseInt(tmp) + 1;
 	 	tmp = course_start_time.substring(3);	
