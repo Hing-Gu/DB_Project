@@ -5,7 +5,7 @@ create or replace function getDay(
   is
      course_day VARCHAR(10);
   begin
-     select replace(replace(replace(to_char(to_date(course_time,'yyyy-mm-dd hh24:mi:ss'),'d'),'2','ì›”ìˆ˜'),'3','í™”ëª©'),'6','ê¸ˆ')
+     select replace(replace(replace(to_char(to_date(course_time,'yyyy-mm-dd hh24:mi:ss'),'d'),'2','¿ù¼ö'),'3','È­¸ñ'),'6','±Ý')
      into course_day
      from dual;
      commit;
