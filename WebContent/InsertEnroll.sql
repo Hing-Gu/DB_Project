@@ -1,80 +1,80 @@
 create or replace procedure InsertEnroll(
-  2     sStudentId IN VARCHAR2,
-  3     sCourseId IN VARCHAR2,
-  4     result OUT VARCHAR2)
-  5  is
-  6  too_many_sumCourseUnit EXCEPTION;
-  7  too_many_students EXCEPTION;
-  8  duplicate_time EXCEPTION;
-  9
- 10  nSumCourseUnit NUMBER;
- 11  nCourseUnit NUMBER;
- 12  nCnt NUMBER;
- 13  nCourseMax NUMBER;
- 14
- 15  begin
- 16  result := '';
- 17  DBMS_OUTPUT.put_line('#');
- 18  DBMS_OUTPUT.put_line(sStudentId || 'ë‹˜ì´ ê³¼ëª©ë²ˆí˜¸ '||sCourseId||'ì˜ ìˆ˜ê°• ë“±ë¡ì„ ìš”ì²­í•˜ì˜€ìŠµë‹ˆë‹¤.');
- 19
- 20  select SUM(c_unit)
- 21  into nSumCourseUnit
- 22  from course where c_id in (select e_c_id from enroll where e_s_id = sStudentId);
- 23
- 24  select c_unit
- 25  into nCourseUnit
- 26  from course
- 27  where c_id = sCourseId;
- 28
- 29  if(nSumCourseUnit + nCourseUnit > 18)
- 30  then
- 31  raise too_many_sumCourseUnit;
- 32  end if;
- 33
- 34  select c_max
- 35  into nCourseMax
- 36  from course
- 37  where c_id = sCourseId;
- 38
- 39  select c_enroll
- 40  into nCnt
- 41  from course
- 42  where c_id = sCourseId;
- 43
- 44  if(nCnt >= nCourseMax)
- 45  then
- 46  raise too_many_students;
- 47  end if;
- 48
- 49  select count(*)
- 50  into nCnt
- 51  from
- 52  (
- 53     select c_time
- 54     from course
- 55     where c_id = sCourseId
- 56     INTERSECT
- 57     select c_time from course where c_id IN (select e_c_id from enroll where e_s_id = sStudentId));
- 58
- 59  if(nCnt > 0)
- 60  then
- 61  raise duplicate_time;
- 62  end if;
- 63
- 64  insert into enroll values(sStudentId,sCourseId);
- 65
- 66  commit;
- 67  result := 'ìˆ˜ê°•ì‹ ì²­ ë“±ë¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.';
- 68
- 69  EXCEPTION
- 70  WHEN too_many_sumCourseUnit THEN
- 71  result := 'ìµœëŒ€í•™ì ì„ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.';
- 72  WHEN too_many_students THEN
- 73  result := 'ìˆ˜ê°•ì‹ ì²­ ì¸ì›ì´ ì´ˆê³¼ë˜ì–´ ë“±ë¡ì´ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.';
- 74  WHEN duplicate_time THEN
- 75  result := 'ì´ë¯¸ ë“±ë¡ëœ ê³¼ëª© ì¤‘ ì¤‘ë³µë˜ëŠ” ì‹œê°„ì´ ì¡´ì¬í•©ë‹ˆë‹¤.';
- 76  WHEN OTHERS THEN
- 77     ROLLBACK;
- 78     result := SQLCODE;
- 79  end;
- 80  /
+     sStudentId IN VARCHAR2,
+     sCourseId IN VARCHAR2,
+     result OUT VARCHAR2)
+  is
+  too_many_sumCourseUnit EXCEPTION;
+  too_many_students EXCEPTION;
+  duplicate_time EXCEPTION;
+
+  nSumCourseUnit NUMBER;
+  nCourseUnit NUMBER;
+  nCnt NUMBER;
+  nCourseMax NUMBER;
+
+  begin
+  result := '';
+  DBMS_OUTPUT.put_line('#');
+  DBMS_OUTPUT.put_line(sStudentId || '´ÔÀÌ °ú¸ñ¹øÈ£ '||sCourseId||'ÀÇ ¼ö°­ µî·ÏÀ» ¿äÃ»ÇÏ¿´½À´Ï´Ù.');
+
+  select SUM(c_unit)
+  into nSumCourseUnit
+  from course where c_id in (select e_c_id from enroll where e_s_id = sStudentId);
+
+  select c_unit
+  into nCourseUnit
+  from course
+  where c_id = sCourseId;
+
+  if(nSumCourseUnit + nCourseUnit > 18)
+  then
+  raise too_many_sumCourseUnit;
+  end if;
+
+  select c_max
+  into nCourseMax
+  from course
+  where c_id = sCourseId;
+
+  select c_enroll
+  into nCnt
+  from course
+  where c_id = sCourseId;
+
+  if(nCnt >= nCourseMax)
+  then
+  raise too_many_students;
+  end if;
+
+  select count(*)
+  into nCnt
+  from
+  (
+     select c_time
+     from course
+     where c_id = sCourseId
+     INTERSECT
+     select c_time from course where c_id IN (select e_c_id from enroll where e_s_id = sStudentId));
+
+  if(nCnt > 0)
+  then
+  raise duplicate_time;
+  end if;
+
+  insert into enroll values(sStudentId,sCourseId);
+
+  commit;
+  result := '¼ö°­½ÅÃ» µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.';
+
+  EXCEPTION
+  WHEN too_many_sumCourseUnit THEN
+  result := 'ÃÖ´ëÇĞÁ¡À» ÃÊ°úÇÏ¿´½À´Ï´Ù.';
+  WHEN too_many_students THEN
+  result := '¼ö°­½ÅÃ» ÀÎ¿øÀÌ ÃÊ°úµÇ¾î µî·ÏÀÌ ºÒ°¡´ÉÇÕ´Ï´Ù.';
+  WHEN duplicate_time THEN
+  result := 'ÀÌ¹Ì µî·ÏµÈ °ú¸ñ Áß Áßº¹µÇ´Â ½Ã°£ÀÌ Á¸ÀçÇÕ´Ï´Ù.';
+  WHEN OTHERS THEN
+     ROLLBACK;
+     result := SQLCODE;
+  end;
+  /

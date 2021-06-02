@@ -1,16 +1,17 @@
-CREATE OR Replace PROCEDURE DeleteEnroll (sStudentId IN VARCHAR2, 
-		sCourseId IN VARCHAR2, 
-		result	OUT VARCHAR2)
+CREATE OR replace PROCEDURE DeleteEnroll
+		(sStudentId IN enroll.e_s_id%TYPE, 
+		sCourseId IN enroll.e_c_id%TYPE, 
+		result OUT VARCHAR2)
 IS
 BEGIN
 	result := '';
+	 DBMS_OUTPUT.put_line('#');
 
-	DBMS_OUTPUT.put_line('#');
 	DBMS_OUTPUT.put_line(sStudentId || '님이 과목번호 ' || sCourseId || '수강 취소를 요청하였습니다.');
 
 	DELETE
 	FROM enroll
-	WHERE s_id = sStudentId and c_id = sCourseId;
+	WHERE e_s_id = sStudentId and e_c_id = sCourseId;
 
 	COMMIT;
 	result := '수강취소가 완료되었습니다.';

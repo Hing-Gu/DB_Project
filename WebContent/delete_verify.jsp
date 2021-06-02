@@ -6,10 +6,10 @@
 
 <%
 	Connection myConn = null;    String	result = null;	
-	String dburl  = "jdbc:oracle:thin:@localhost:1521:orcl";
+	String dburl  = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user="db1715914";   String passwd="oracle";
 	String dbdriver = "oracle.jdbc.driver.OracleDriver";    
-	CallableStatement cstmt;
+	
 	try {
 		Class.forName(dbdriver);
 	    myConn =  DriverManager.getConnection (dburl, user, passwd);
@@ -18,25 +18,15 @@
 	}
 	
 	String session_id= (String)session.getAttribute("user");
-	if(session_id != null) {
-		%>
-    <script>
-    document.location.href='./login.jsp'
-    </script>
-<%
-	}
-	
 		String s_id = (String)session.getAttribute("user");
-		String c_id = request.getParameter("c_id");
-		int c_id_no = Integer.parseInt(request.getParameter("c_id_no"));		
-	    cstmt = myConn.prepareCall("{call DeleteEnroll(?,?,?,?)}");
+		String c_id = request.getParameter("c_id");	
+		CallableStatement cstmt = myConn.prepareCall("{call DeleteEnroll(?,?,?)}");
 		cstmt.setString(1, s_id);
 		cstmt.setString(2, c_id);
-		cstmt.setInt(3,c_id_no);
-		cstmt.registerOutParameter(4, java.sql.Types.VARCHAR);	
+		cstmt.registerOutParameter(3, java.sql.Types.VARCHAR);	
 		try  {  	
 			cstmt.execute();
-			result = cstmt.getString(4);		
+			result = cstmt.getString(3);		
 %>
 	<script>	
 		alert("<%= result %>"); 
