@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
-<html><head><title>╪Ж╟╜╫ец╩ ют╥б</title></head>
+<html><head><title>б╪ц╤б╟б╜б╫ц┘ц┐б╩ ц─ц■б╥ц┌</title></head>
 <body>
 
 <%
@@ -29,8 +29,8 @@ cstmt.setString(1,s_id);
 cstmt.setString(2,c_id);
 cstmt.registerOutParameter(3,java.sql.Types.VARCHAR);
 try{
-   cstmt.execute();
-   result = cstmt.getString(3);
+	cstmt.execute();
+	result = cstmt.getString(3);
 
 %>
 <script>
