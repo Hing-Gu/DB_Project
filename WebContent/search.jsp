@@ -75,7 +75,6 @@ try {
 		cstmt.setString(2,course_time);
 		cstmt.execute();
 		course_day = cstmt.getString(1);
-		System.out.println("result = "+course_day);
 		
 		cstmt.close();
 		
@@ -85,7 +84,6 @@ try {
 		cstmt.setString(2,course_time);
 		cstmt.execute();
 		course_start_time = cstmt.getString(1);
-		System.out.println("result2 = "+course_start_time);
 		
 		cstmt.close();		
 		
