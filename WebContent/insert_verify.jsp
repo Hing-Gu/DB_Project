@@ -1,4 +1,3 @@
-<%@page import="javax.servlet.jsp.tagext.TryCatchFinally"%>
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
@@ -8,7 +7,6 @@
 <%
  String s_id = (String)session.getAttribute("user");
  String c_id = request.getParameter("c_id");
- int c_id_no = Integer.parseInt(request.getParameter("c_id_no"));
 %>
 
 <%
@@ -25,15 +23,14 @@ try{
 }catch(SQLException ex){
 	System.err.println("SQLException: " + ex.getMessage());
 }
-CallableStatement cstmt = myConn.prepareCall("{call InsertEnroll(?,?,?,?)}");
+CallableStatement cstmt = myConn.prepareCall("{call InsertEnroll(?,?,?)}");
 
 cstmt.setString(1,s_id);
 cstmt.setString(2,c_id);
-cstmt.setInt(3,c_id_no);
-cstmt.registerOutParameter(4,java.sql.Types.VARCHAR);
+cstmt.registerOutParameter(3,java.sql.Types.VARCHAR);
 try{
 	cstmt.execute();
-	result = cstmt.getString(4);
+	result = cstmt.getString(3);
 
 %>
 <script>
