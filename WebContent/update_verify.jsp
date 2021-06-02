@@ -10,8 +10,8 @@ Connection myConn = null;
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
 
-String user = "db1715914";
-String passwd = "oracle";
+String user = "db1812572";
+String passwd = "soo";
 Class.forName(dbdriver);
 
 PreparedStatement stmt = null;
