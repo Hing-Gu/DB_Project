@@ -1,15 +1,14 @@
 create or replace function getDay(
-  2     course_time VARCHAR
-  3  )
-  4  return VARCHAR
-  5  is
-  6     course_day VARCHAR(10);
-  7  begin
-  8     select replace(replace(replace(to_char(to_date(course_time,'yyyy-mm-dd hh24:mi:ss'),'d'),'2','ì›”ìˆ˜'),'3','í™”ëª©'),'6','ê¸ˆ')
-  9     into course_day
- 10     from dual;
- 11
- 12     commit;
- 13     return course_day;
- 14  end;
- 15  /
+  course_time VARCHAR
+  )
+  return VARCHAR
+  is
+     course_day VARCHAR(10);
+  begin
+     select replace(replace(replace(to_char(to_date(course_time,'yyyy-mm-dd hh24:mi:ss'),'d'),'2','¿ù¼ö'),'3','È­¸ñ'),'6','±Ý')
+     into course_day
+     from dual;
+     commit;
+     return course_day;
+  end;
+  /

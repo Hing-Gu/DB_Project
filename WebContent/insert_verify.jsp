@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
-<html><head><title>╪Ж╟╜╫ец╩ ют╥б</title></head>
+<html><head><title>б╪ц╤б╟б╜б╫ц┘ц┐б╩ ц─ц■б╥ц┌</title></head>
 <body>
 
 <%
@@ -13,15 +13,15 @@
 Connection myConn = null;
 String result = null;
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-String user = "db1812572";
-String passwd = "soo";
+String user = "db1715914";
+String passwd = "oracle";
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
 try{
-	Class.forName(dbdriver);
-	myConn = DriverManager.getConnection(dburl,user,passwd);
+   Class.forName(dbdriver);
+   myConn = DriverManager.getConnection(dburl,user,passwd);
 }catch(SQLException ex){
-	System.err.println("SQLException: " + ex.getMessage());
+   System.err.println("SQLException: " + ex.getMessage());
 }
 CallableStatement cstmt = myConn.prepareCall("{call InsertEnroll(?,?,?)}");
 
@@ -39,18 +39,17 @@ try{
 </script>
 <%
 }catch(SQLException ex){
-	System.err.println("SQLExcetion: " + ex.getMessage());
+   System.err.println("SQLExcetion: " + ex.getMessage());
 }
 finally{
-	if(cstmt != null)
-		try{
-			myConn.commit();
-			cstmt.close();
-			myConn.close();
-		}catch(SQLException ex){}
+   if(cstmt != null)
+      try{
+         myConn.commit();
+         cstmt.close();
+         myConn.close();
+      }catch(SQLException ex){}
 }
 %>
 
 </body>
 </html>
-    

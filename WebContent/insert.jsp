@@ -23,8 +23,8 @@ int course_end_hh;
 int course_end_mi;
 String course_start_time;
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-String user = "db1812572";
-String passwd = "soo";
+String user = "db1715914";
+String passwd = "oracle";
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
 try{
