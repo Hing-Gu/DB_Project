@@ -19,7 +19,7 @@ DBMS_OUTPUT.put_line('결과: '||result);
 InsertEnroll('1400015','M600',result);
 DBMS_OUTPUT.put_line('결과: '||result);
 
-InsertEnroll('1400015','M300',result);
+InsertEnroll('1400015','M700',result);
 DBMS_OUTPUT.put_line('결과: '||result);
 
 DBMS_OUTPUT.put_line('**********CURSOR를 이용한 SELECT테스트**********');
