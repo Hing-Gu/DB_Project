@@ -45,7 +45,7 @@ if(myResultSet != null){
  <td align = "center"><%= c_time %></td>
  <td align = "center"><%= c_addr %></td>
  <td align = "center"><%= c_unit %></td>
- <td align="center"><a href ="insert_verify.jsp?c_id=<%= c_id %>&c_id_no=<%= c_id_no %>">삭제</a></td>		
+ <td align="center"><a href ="delete_verify.jsp?c_id=<%= c_id %>">삭제</a></td>		
 </tr>
 <%		
 	}
