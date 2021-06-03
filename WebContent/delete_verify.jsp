@@ -7,7 +7,8 @@
 <%
 	Connection myConn = null;    String	result = null;	
 	String dburl  = "jdbc:oracle:thin:@localhost:1521:xe";
-	String user="db1715914";   String passwd="oracle";
+	String user="db1812572";   String passwd="soo";
+
 	String dbdriver = "oracle.jdbc.driver.OracleDriver";    
 	
 	try {
@@ -19,14 +20,20 @@
 	
 	String session_id= (String)session.getAttribute("user");
 		String s_id = (String)session.getAttribute("user");
-		String c_id = request.getParameter("c_id");	
+		String v_c_id = request.getParameter("c_id");	
 		CallableStatement cstmt = myConn.prepareCall("{call DeleteEnroll(?,?,?)}");
 		cstmt.setString(1, s_id);
-		cstmt.setString(2, c_id);
+		cstmt.setString(2, v_c_id);
 		cstmt.registerOutParameter(3, java.sql.Types.VARCHAR);	
 		try  {  	
 			cstmt.execute();
-			result = cstmt.getString(3);		
+			result = cstmt.getString(3);
+			if (result.equals("수강취소가 완료되었습니다.")){
+				String sql = "{call delete_c_enroll(?)}";
+				CallableStatement cstmt1 = myConn.prepareCall(sql);
+				cstmt1.setString(1,v_c_id);
+				cstmt1.execute();
+			}
 %>
 	<script>	
 		alert("<%= result %>"); 
