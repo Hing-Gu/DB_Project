@@ -31,7 +31,7 @@ myResultSet = stmt.executeQuery(mySQL);
 
 if(myResultSet != null){
 	while(myResultSet.next()){
-		String c_id = myResultSet.getString("c_id");
+		String v_c_id = myResultSet.getString("c_id");
 		int c_id_no = myResultSet.getInt("c_id_no");
 		String c_name = myResultSet.getString("c_name");
 		String c_time = myResultSet.getString("c_time");
@@ -39,13 +39,13 @@ if(myResultSet != null){
 		int c_unit = myResultSet.getInt("c_unit");
 %>
 <tr>
- <td align="center"><%= c_id %></td>
+ <td align="center"><%= v_c_id %></td>
  <td align = "center"><%= c_id_no %></td>
  <td align="center"><%= c_name %></td>
  <td align = "center"><%= c_time %></td>
  <td align = "center"><%= c_addr %></td>
  <td align = "center"><%= c_unit %></td>
- <td align="center"><a href ="delete_verify.jsp?c_id=<%= c_id %>">삭제</a></td>		
+ <td align="center"><a href ="delete_verify.jsp?c_id=<%= v_c_id %>">삭제</a></td>		
 </tr>
 <%		
 	}
