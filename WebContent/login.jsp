@@ -8,10 +8,20 @@ charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
 input{
 	width:200px;
-}</style>
+}
+ table {
+    width: 75%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+</style>
 <table width="75%" align="center" bgcolor="#AFEEEE" >
-<tr> <td><div align="center">아이디와 패스워드를 입력하세요
-</div></td></table>
+<tr> <td><b><div align="center">아이디와 패스워드를 입력하세요
+</div></b></td></table>
 <table width="75%" align="center" >
 <form method="post" action="login_verify.jsp">
 <tr>

@@ -8,6 +8,15 @@ else log = "<a href=logout.jsp>로그아웃</a>"; %>
  a:link { color: red; text-decoration: none;}
  a:visited { color: black; text-decoration: none;}
  a:hover { color: blue; text-decoration: underline;}
+ table {
+    width: 75%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
 </style>
 
 <table width="75%" align="center" bgcolor="#AFEEEE">

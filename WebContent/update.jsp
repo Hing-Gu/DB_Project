@@ -8,8 +8,8 @@
 	Connection myConn = null;
 	String dbdriver = "oracle.jdbc.driver.OracleDriver";
 	String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-	String user = "db1812572";
-	String passwd = "soo";
+	String user = "db1715914";
+	String passwd = "oracle";
 	Class.forName(dbdriver);
 	ResultSet rs = null;
 	Statement stmt = null;
@@ -73,6 +73,7 @@
 			<tr>
 			  <td id="update_td">전공</td>
 			  <td><input id="update_mj_in" type="major" name="major" size="10" value=<%=user_major%>></td>
+			  <td></td><td></td>
 			</tr>
 			
 			<tr>
