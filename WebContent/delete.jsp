@@ -14,6 +14,14 @@ Connection myConn = null;
 Statement stmt = null;
 ResultSet myResultSet = null;
 String mySQL = "";
+String sql;
+CallableStatement cstmt = null;
+String course_day = "";
+String course_time = "";
+String tmp = "";
+int course_end_hh;
+int course_end_mi;
+String course_start_time;
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
 String user = "db1812572";
 String passwd = "soo";
@@ -37,12 +45,35 @@ if(myResultSet != null){
 		String c_time = myResultSet.getString("c_time");
 		String c_addr = myResultSet.getString("c_addr");
 		int c_unit = myResultSet.getInt("c_unit");
+		
+		sql = "{? = call getDay(?)}";
+		cstmt = myConn.prepareCall(sql);
+		cstmt.registerOutParameter(1, java.sql.Types.VARCHAR);
+		cstmt.setString(2,c_time);
+		cstmt.execute();
+		course_day = cstmt.getString(1);
+		
+		cstmt.close();
+		
+		sql = "{? = call getTime(?)}";
+		cstmt = myConn.prepareCall(sql);
+		cstmt.registerOutParameter(1, java.sql.Types.VARCHAR);
+		cstmt.setString(2,c_time);
+		cstmt.execute();
+		course_start_time = cstmt.getString(1);;
+		
+		cstmt.close();		
+		
+	 	tmp = course_start_time.substring(0,2);	
+	 	course_end_hh = Integer.parseInt(tmp) + 1;
+	 	tmp = course_start_time.substring(3);	
+	 	course_end_mi = Integer.parseInt(tmp) + 15;
 %>
 <tr>
  <td align="center"><%= v_c_id %></td>
  <td align = "center"><%= c_id_no %></td>
  <td align="center"><%= c_name %></td>
- <td align = "center"><%= c_time %></td>
+ <td align="center"><%= course_day %> <%=course_start_time %> - <%= course_end_hh %>:<%= course_end_mi %></td>
  <td align = "center"><%= c_addr %></td>
  <td align = "center"><%= c_unit %></td>
  <td align="center"><a href ="delete_verify.jsp?c_id=<%= v_c_id %>">삭제</a></td>		
