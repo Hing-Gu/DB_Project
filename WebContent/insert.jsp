@@ -23,8 +23,8 @@ int course_end_hh;
 int course_end_mi;
 String course_start_time;
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-String user = "db1715914";
-String passwd = "oracle";
+String user = "db1812572";
+String passwd = "soo";
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
 try{
@@ -37,7 +37,7 @@ myResultSet = stmt.executeQuery(mySQL);
 
 if(myResultSet != null){
 	while(myResultSet.next()){
-		String c_id = myResultSet.getString("c_id");
+		String v_c_id = myResultSet.getString("c_id");
 		int c_id_no = myResultSet.getInt("c_id_no");
 		String c_name = myResultSet.getString("c_name");
 		String c_time = myResultSet.getString("c_time");
@@ -67,12 +67,12 @@ if(myResultSet != null){
 	 	course_end_mi = Integer.parseInt(tmp) + 15;
 %>
 <tr>
- <td align="center"><%= c_id %></td>
+ <td align="center"><%= v_c_id %></td>
  <td align = "center"><%= c_id_no %></td>
  <td align="center"><%= c_name %></td>
  <td align="center"><%= course_day %> <%=course_start_time %> - <%= course_end_hh %>:<%= course_end_mi %></td>
  <td align = "center"><%= c_unit %></td>
- <td align="center"><a href ="insert_verify.jsp?c_id=<%= c_id %>&c_id_no=<%= c_id_no %>">신청</a></td>		
+ <td align="center"><a href ="insert_verify.jsp?c_id=<%= v_c_id %>&c_id_no=<%= c_id_no %>">신청</a></td>		
 </tr>
 <%		
 	}
