@@ -1,6 +1,7 @@
 create or replace procedure SelectTimeTable(
 	sStudentId IN VARCHAR2)
 is
+	v_student students%ROWTYPE;
 	cId course.c_id%TYPE;
 	cName course.c_name%TYPE;
 	cUnit course.c_unit%TYPE;
@@ -18,8 +19,13 @@ CURSOR cur(sStudentId VARCHAR2) IS
 begin
 	open cur (sStudentId);
 	
+	select s_major
+	into v_student.s_major
+	from students
+	where s_id = sStudentId;
+
 	DBMS_OUTPUT.put_line('#');
-	DBMS_OUTPUT.put_line(sStudentId||'님의 수강신청 시간표입니다.');
+	DBMS_OUTPUT.put_line(v_student.s_major||'전공 '||sStudentId||'님의 수강신청 시간표입니다.');
 
 LOOP
 	FETCH cur INTO cId, cName, cUnit, cTime, cAddr;
