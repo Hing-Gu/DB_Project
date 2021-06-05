@@ -8,7 +8,7 @@
 
 <table width="75%" align="center" border>
 <br>
-<tr><th>과목번호</th><th>분반</th><th>과목명</th><th>강의시간</th><th>강의장소</th><th>학점</th><th>수강신청</th></tr>
+<tr><th>과목번호</th><th>과목명</th><th>강의시간</th><th>강의장소</th><th>학점</th><th>수강신청</th></tr>
 <%
 Connection myConn = null;
 Statement stmt = null;
@@ -69,7 +69,6 @@ if(myResultSet != null){
 %>
 <tr>
  <td align="center"><%= v_c_id %></td>
- <td align = "center"><%= c_id_no %></td>
  <td align="center"><%= c_name %></td>
  <td align="center"><%= course_day %> <%=course_start_time %> - <%= course_end_hh %>:<%= course_end_mi %></td>
   <td align = "center"><%= c_addr %></td>

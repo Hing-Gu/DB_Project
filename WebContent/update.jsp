@@ -32,7 +32,7 @@
 			//s_major, s_name, s_pwd 변경위해 받아옴
 			myConn=DriverManager.getConnection(dburl, user, passwd);
 			stmt = myConn.createStatement();
-			String mySQL = "select s_major,s_pwd, s_enroll_unit from students where s_id='" + session_id + "'";
+			String mySQL = "select s_major,s_pwd from students where s_id='" + session_id + "'";
 			rs=stmt.executeQuery(mySQL);
 		}catch(SQLException e){
 			out.println(e);

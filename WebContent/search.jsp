@@ -42,7 +42,7 @@ String passwd = "oracle";
 
 <br>
 <table width="75%" align="center" border="1">
-<tr><th>과목번호</th><th>분반</th><th>과목명</th><th>시간</th><th>강의장소</th><th>학점</th></tr>
+<tr><th>과목번호</th><th>과목명</th><th>시간</th><th>강의장소</th><th>학점</th></tr>
 
 <%
 try { 
@@ -97,7 +97,6 @@ try {
 
 <tr>
 	<td align="center"><%=course_id %></td>
-	<td align="center"><%=course_id_no %></td>
 	<td align="center"><%=course_name %></td>
 	<td align="center"><%=course_day %> <%=course_start_time %> - <%= course_end_hh %>:<%= course_end_mi %></td>
 	<td align="center"><%=course_addr %></td>
