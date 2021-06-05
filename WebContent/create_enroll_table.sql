@@ -1,0 +1,4 @@
+CREATE TABLE ENROLL(
+	e_s_id VARCHAR(10) CONSTRAINT enroll1_fk REFERENCES students(s_id) NOT NULL,
+	e_c_id VARCHAR(5) CONSTRAINT enroll2_fk REFERENCES course(c_id) NOT NULL
+);
