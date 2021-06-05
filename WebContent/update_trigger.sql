@@ -1,3 +1,4 @@
+SET ServerOutput On;
 CREATE OR REPLACE TRIGGER BeforeUpdateStudent 
 BEFORE
 UPDATE ON students

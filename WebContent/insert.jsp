@@ -8,7 +8,7 @@
 
 <table width="75%" align="center" border>
 <br>
-<tr><th>과목번호</th><th>분반</th><th>과목명</th><th>강의시간</th><th>학점</th><th>수강신청</th></tr>
+<tr><th>과목번호</th><th>분반</th><th>과목명</th><th>강의시간</th><th>강의장소</th><th>학점</th><th>수강신청</th></tr>
 <%
 Connection myConn = null;
 Statement stmt = null;
@@ -23,8 +23,8 @@ int course_end_hh;
 int course_end_mi;
 String course_start_time;
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-String user = "db1812572";
-String passwd = "soo";
+String user = "db1715914";
+String passwd = "oracle";
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
 try{
@@ -32,7 +32,7 @@ try{
 	myConn=DriverManager.getConnection(dburl,user,passwd);
 	stmt=myConn.createStatement();
 
-mySQL = "select c_id,c_id_no,c_name,c_time,c_unit from course where c_id not in (select e_c_id from enroll where e_s_id='"+session_id+"')";
+mySQL = "select c_id,c_id_no,c_name,c_time,c_addr,c_unit from course where c_id not in (select e_c_id from enroll where e_s_id='"+session_id+"')";
 myResultSet = stmt.executeQuery(mySQL);
 
 if(myResultSet != null){
@@ -41,6 +41,7 @@ if(myResultSet != null){
 		int c_id_no = myResultSet.getInt("c_id_no");
 		String c_name = myResultSet.getString("c_name");
 		String c_time = myResultSet.getString("c_time");
+		String c_addr = myResultSet.getString("c_addr");
 		int c_unit = myResultSet.getInt("c_unit");
 		
 		sql = "{? = call getDay(?)}";
@@ -71,6 +72,7 @@ if(myResultSet != null){
  <td align = "center"><%= c_id_no %></td>
  <td align="center"><%= c_name %></td>
  <td align="center"><%= course_day %> <%=course_start_time %> - <%= course_end_hh %>:<%= course_end_mi %></td>
+  <td align = "center"><%= c_addr %></td>
  <td align = "center"><%= c_unit %></td>
  <td align="center"><a href ="insert_verify.jsp?c_id=<%= v_c_id %>&c_id_no=<%= c_id_no %>">신청</a></td>		
 </tr>

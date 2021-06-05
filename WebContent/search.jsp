@@ -36,12 +36,12 @@ String sub_sql;
 String day_sql;
 String time_sql;
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-String user = "db1812572";
-String passwd = "soo";
+String user = "db1715914";
+String passwd = "oracle";
 %>
 
 <br>
-<table width="80%" align="center" border="1">
+<table width="75%" align="center" border="1">
 <tr><th>과목번호</th><th>분반</th><th>과목명</th><th>시간</th><th>강의장소</th><th>학점</th></tr>
 
 <%
