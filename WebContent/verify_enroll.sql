@@ -1,3 +1,4 @@
+SET ServerOutput On;
 create or replace procedure SelectTimeTable(
 	sStudentId IN VARCHAR2)
 is
@@ -19,18 +20,18 @@ begin
 	open cur (sStudentId);
 	
 	DBMS_OUTPUT.put_line('#');
-	DBMS_OUTPUT.put_line(sStudentId||'ë‹˜ì˜ ìˆ˜ê°•ì‹ ì²­ ì‹œê°„í‘œì…ë‹ˆë‹¤.');
+	DBMS_OUTPUT.put_line(sStudentId||'´ÔÀÇ ¼ö°­½ÅÃ» ½Ã°£Ç¥ÀÔ´Ï´Ù.');
 
 LOOP
 	FETCH cur INTO cId, cName, cUnit, cTime, cAddr;
 	EXIT WHEN cur%NOTFOUND;
 
-	DBMS_OUTPUT.put_line('ê³¼ëª©ë²ˆí˜¸: '||cId||', ê³¼ëª©ëª…: '||cName||', í•™ì : '||to_char(cUnit)||', ì¥ì†Œ: '||cAddr);
+	DBMS_OUTPUT.put_line('°ú¸ñ¹øÈ£: '||cId||', °ú¸ñ¸í: '||cName||', ÇĞÁ¡: '||to_char(cUnit)||', Àå¼Ò: '||cAddr);
 		
 	cTotalUnit := cTotalUnit + cUnit;
 END LOOP;
 
-	DBMS_OUTPUT.put_line('ì´ '|| TO_CHAR(cur%ROWCOUNT)||' ê³¼ëª©ê³¼ ì´ '||TO_CHAR(cTotalUnit)||'í•™ì ì„ ì‹ ì²­í•˜ì˜€ìŠµë‹ˆë‹¤.');
+	DBMS_OUTPUT.put_line('ÃÑ '|| TO_CHAR(cur%ROWCOUNT)||' °ú¸ñ°ú ÃÑ '||TO_CHAR(cTotalUnit)||'ÇĞÁ¡À» ½ÅÃ»ÇÏ¿´½À´Ï´Ù.');
 	CLOSE cur;
 END;
 /

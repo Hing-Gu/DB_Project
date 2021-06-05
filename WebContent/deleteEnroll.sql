@@ -1,3 +1,4 @@
+SET ServerOutput On;
 CREATE OR replace PROCEDURE DeleteEnroll
 		(sStudentId IN enroll.e_s_id%TYPE, 
 		sCourseId IN enroll.e_c_id%TYPE, 

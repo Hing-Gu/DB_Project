@@ -1,5 +1,4 @@
 SET ServerOutput On;
-/
 
 DECLARE
 result VARCHAR(50) := '';
@@ -8,21 +7,21 @@ BEGIN
 
 DBMS_OUTPUT.enable;
 
-DBMS_OUTPUT.put_line('**********Insert ë° ì—ëŸ¬ ì²˜ë¦¬ í…ŒìŠ¤íŠ¸**********');
+DBMS_OUTPUT.put_line('**********Insert ¹× ¿¡·¯ Ã³¸® Å×½ºÆ®**********');
 
 InsertEnroll('1400015','M800',result);
-DBMS_OUTPUT.put_line('ê²°ê³¼: '||result);
+DBMS_OUTPUT.put_line('°á°ú: '||result);
 
 InsertEnroll('1400015','C400',result);
-DBMS_OUTPUT.put_line('ê²°ê³¼: '||result);
+DBMS_OUTPUT.put_line('°á°ú: '||result);
 
 InsertEnroll('1400015','M600',result);
-DBMS_OUTPUT.put_line('ê²°ê³¼: '||result);
+DBMS_OUTPUT.put_line('°á°ú: '||result);
 
 InsertEnroll('1400015','M700',result);
-DBMS_OUTPUT.put_line('ê²°ê³¼: '||result);
+DBMS_OUTPUT.put_line('°á°ú: '||result);
 
-DBMS_OUTPUT.put_line('**********CURSORë¥¼ ì´ìš©í•œ SELECTí…ŒìŠ¤íŠ¸**********');
+DBMS_OUTPUT.put_line('**********CURSOR¸¦ ÀÌ¿ëÇÑ SELECTÅ×½ºÆ®**********');
 
 SelectTimeTable('1400015');
 
