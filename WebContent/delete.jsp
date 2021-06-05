@@ -8,7 +8,7 @@
 
 <table width="75%" align="center" border>
 <br>
-<tr><th>과목번호</th><th>분반</th><th>과목명</th><th>시간</th><th>강의장소</th><th>학점</th><th>삭제</th></tr>
+<tr><th>과목번호</th><th>분반</th><th>과목명</th><th>강의시간</th><th>강의장소</th><th>학점</th><th>신청취소</th></tr>
 <%
 Connection myConn = null;
 Statement stmt = null;
@@ -23,8 +23,8 @@ int course_end_hh;
 int course_end_mi;
 String course_start_time;
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-String user = "db1812572";
-String passwd = "soo";
+String user = "db1715914";
+String passwd = "oracle";
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
 try{

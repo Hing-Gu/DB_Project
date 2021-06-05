@@ -7,7 +7,7 @@
 <%
 	Connection myConn = null;    String	result = null;	
 	String dburl  = "jdbc:oracle:thin:@localhost:1521:xe";
-	String user="db1812572";   String passwd="soo";
+	String user="db1715914";   String passwd="oracle";
 
 	String dbdriver = "oracle.jdbc.driver.OracleDriver";    
 	

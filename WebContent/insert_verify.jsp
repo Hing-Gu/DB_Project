@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
-<html><head><title>쩌철째짯쩍��쨩 ��쨌�</title></head>
+<html><head><title>수강신청 입력</title></head>
 <body>
 
 <%
@@ -13,8 +13,8 @@
 Connection myConn = null;
 String result = null;
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-String user = "db1812572";
-String passwd = "soo";
+String user = "db1715914";
+String passwd = "oracle";
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
 try{
